@@ -57,6 +57,7 @@ module PayPal::SDK
           object_of :id, String
           object_of :intent, String
           object_of :payer, Payer
+          object_of :application_context, ApplicationContext
           object_of :payee, Payee
           object_of :cart, String
           array_of  :transactions, Transaction
@@ -297,6 +298,30 @@ module PayPal::SDK
           object_of :related_funding_option, FundingOption
           object_of :payer_info, PayerInfo
           object_of :billing, Billing
+        end
+      end
+
+      class ApplicationContext < Base
+        def self.load_members
+          object_of :brand_name, String
+          object_of :locale, String
+          object_of :landing_page, String
+          object_of :shipping_preference, String
+          object_of :user_action, String
+          object_of :preferred_payment_source, ApplicationContextPaymentSource
+        end
+      end
+
+      class ApplicationContextPaymentSource < Base
+        def self.load_members
+          object_of :token, PaymentSourceToken
+        end
+      end
+
+      class PaymentSourceToken < Base
+        def self.load_members
+          object_of :id, String
+          object_of :type, String
         end
       end
 
